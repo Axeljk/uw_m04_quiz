@@ -27,17 +27,65 @@
 			<button id="begin">Begin</button>
 		</div>
 		<div class="question">
-			<p>What is your malfunction?</p>
-			<button data-answer="wrong">Nothing</button>
-			<button data-answer="right">Everything</button>
+			<h2>A semicolon is necessary to end a statement in Javascript.</h2>
+			<button data-answer="wrong" class="answer">True</button>
+			<button data-answer="right" class="answer">False</button>
 		</div>
 		<div class="question">
-			<p>What is D?</p>
-			<button data-answer="wrong">Huh</button>
-			<button data-answer="wrong">What</button>
-			<button data-answer="wrong">Can you repeat that</button>
-			<button data-answer="right">I am D</button>
+			<h2>This statement is false.</h2>
+			<button data-answer="wrong" class="answer">True</button>
+			<button data-answer="right" class="answer">False</button>
 		</div>
+		<div class="question">
+			<h2>This statement is true.</h2>
+			<button data-answer="right" class="answer">True</button>
+			<button data-answer="wrong" class="answer">False</button>
+		</div>
+		<div class="question">
+			<h2>What is D?</h2>
+			<button data-answer="wrong" class="answer">A</button>
+			<button data-answer="wrong" class="answer">B</button>
+			<button data-answer="wrong" class="answer">C</button>
+			<button data-answer="right" class="answer">D</button>
+		</div>
+		<div class="question">
+			<h2>What is B?</h2>
+			<button data-answer="wrong" class="answer">A</button>
+			<button data-answer="right" class="answer">B</button>
+			<button data-answer="wrong" class="answer">C</button>
+			<button data-answer="wrong" class="answer">D</button>
+		</div>
+		<div class="question">
+			<h2>What is A?</h2>
+			<button data-answer="right" class="answer">A</button>
+			<button data-answer="wrong" class="answer">B</button>
+			<button data-answer="wrong" class="answer">C</button>
+			<button data-answer="wrong" class="answer">D</button>
+		</div>
+		<div class="question">
+			<h2>What is C?</h2>
+			<button data-answer="wrong" class="answer">A</button>
+			<button data-answer="wrong" class="answer">B</button>
+			<button data-answer="right" class="answer">C</button>
+			<button data-answer="wrong" class="answer">D</button>
+		</div>
+		<section id="end">
+			<h2>End of quiz</h2>
+			<hr>
+			<p>Questions score: <span id="qScore"></span> out of <span id="qAnswered"></span> (<span id="qUnanswered"></span> of <span id="qTotal"></span> questions remain). Total score: <span id="qFinal"></span></p>
+			<p>Time left: <span id="tLeft"></span> <span id="tWrong">. Questions wrong:</span>. Total score: <span id="tFinal"></span></p>
+			<p>You did <span id="rating"></span> Final score: <span id="msg"></span></p>
+			<form>
+				<label for="name">Enter your name to the highscores:</label>
+				<input id="name" type="text" maxlength="24"></input><br><br>
+				<button id="submit">Submit score</button>
+			</form>
+		</section>
+		<section id="scores">
+			<h2>High Scores</h2>
+			<ul id="highscores">
+			</ul>
+		</section>
 	</main>
 </body>
 </html>

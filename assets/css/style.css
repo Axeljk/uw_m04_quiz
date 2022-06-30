@@ -64,9 +64,11 @@ main > div {
 	align-items: center;
 	height: 80%;
 }
+main > section {
+	display: none;
+}
 #scoreboard {
 	text-align: center;
-	display: none;
 	justify-content: space-around;
 	align-items: center;
 	height: 65px;
@@ -85,7 +87,7 @@ section p {
 	justify-content: space-evenly;
 	height: auto;
 }
-.question > p {
+.question > h2 {
 	grid-column: 1 / 3;
 }
 button {
@@ -102,6 +104,7 @@ button {
 	margin: 1.5em;
 	font-size: 2em;
 	font-family: VT323, monospace;
+	letter-spacing: 2px;
 	font-weight: 600;
 }
 #begin {
@@ -110,6 +113,16 @@ button {
 	font-family: Orbitron serif;
 	font-weight: 900;
 	margin: 0 auto;
+}
+#end {
+	display: none;
+	grid-template-columns: auto;
+	margin: 0 auto;
+	justify-content: space-around;
+	width: 100%;
+}
+#highscores {
+	width: 90%;
 }
 
 @media all and (max-width: 1000px) {
