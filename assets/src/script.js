@@ -19,8 +19,10 @@ window.onload = () => {
 	questions = Array.from(document.querySelectorAll("main > div"));
 }
 
-// Beginning of quiz.
+// Beginning of quiz. Set timer and score again just in case.
 function startQuiz() {
+	timer = 60.0;
+	score = 0;
 	timerCount = window.setInterval(Timer, 100);
 	document.querySelector("#scoreboard").setAttribute("style", "display: flex");
 	questionSelect();
@@ -42,8 +44,10 @@ function answer(event) {
 function Timer() {
 	if (timer > 0)
 		timer = (timer - 0.1);
-	else
+	else {
+		timer = 0;
 		endGame();
+	}
 
 	updateScoreboard();
 }
@@ -71,7 +75,7 @@ function endGame() {
 	clearInterval(timerCount);
 	if (questions.length > 0)
 		questions[selected].setAttribute("style", "display: none");
-	document.querySelector("header").setAttribute("style", "display: none");
+//	document.querySelector("header").setAttribute("style", "display: none");
 	document.querySelector("#scoreboard").setAttribute("style", "display: none");
 	document.querySelector("#end").setAttribute("style", "display: grid");
 
@@ -104,26 +108,43 @@ function endGame() {
 		document.querySelector("#rating").textContent = "okay.";
 	else
 		document.querySelector("#rating").textContent = "awful.";
-	document.querySelector("#msg").textContent = questionScore + timeScore;
 	score = questionScore + timeScore;
+	document.querySelector("#msg").textContent = score;
 }
 
 function scores(event) {
+	let scoreData = [];
+	let spaces = window.innerWidth > 600 ? 20 : 10;
+
+	// Switch screens.
 	event.preventDefault();
 	document.querySelector("#end").setAttribute("style", "display: none");
 	document.querySelector("#scores").setAttribute("style", "display: block");
 
-	let entry = {
-		name: document.querySelector("#name").value,
-		score: score
+	// Read any saved scores, add our new score (if finished), sort, and save.
+	if (localStorage.getItem("scoreData") != null)
+		scoreData = JSON.parse(localStorage.getItem("scoreData"));
+	if (document.querySelector("#name").value != "") {
+		scoreData.push({
+			name: document.querySelector("#name").value,
+			score: score
+		});
+	}
+	if (scoreData != []) {
+		scoreData.sort((a, b) => { return b.score - a.score; });
+		scoreData.splice(10);
+		localStorage.setItem("scoreData", JSON.stringify(scoreData));
 	}
 
-	let item = document.createElement("li");
-	item.textContent = JSON.stringify(entry);
-	document.querySelector("#highscores").appendChild(item);
+	// Display the high scores.
+	for (let i = 0; i < scoreData.length; i++) {
+		let item = document.createElement("li");
+		item.textContent = scoreData[i].name.padEnd(spaces, "\xa0") + scoreData[i].score.toString().padStart(4, "0");
+		document.querySelector("#highscores").appendChild(item);
+	}
 }
 
 function updateScoreboard() {
-	document.querySelector("#timer").textContent = timer.toFixed(1);
-	document.querySelector("#score").textContent = score;
+	document.querySelector("#timer").textContent = timer.toFixed(1).toString().padStart(4, "0");
+	document.querySelector("#score").textContent = score.toString().padStart(3, "0");
 }
