@@ -16,14 +16,18 @@ window.onload = () => {
 	document.querySelector("#begin").addEventListener("click", startQuiz);
 	document.querySelector("main").addEventListener("click", answer);
 	document.querySelector("#submit").addEventListener("click", scores);
-	questions = Array.from(document.querySelectorAll("main > div"));
 }
 
-// Beginning of quiz. Set timer and score again just in case.
+// Beginning of quiz.
 function startQuiz() {
+	// Set everything again just in case.
 	timer = 60.0;
 	score = 0;
+	selected = 0;
+	questions = Array.from(document.querySelectorAll("main > div"));
+
 	timerCount = window.setInterval(Timer, 100);
+	document.querySelector("#scores").setAttribute("style", "display: none");
 	document.querySelector("#scoreboard").setAttribute("style", "display: flex");
 	questionSelect();
 }
@@ -112,9 +116,10 @@ function endGame() {
 	document.querySelector("#msg").textContent = score;
 }
 
+// Creates the highscore list.
 function scores(event) {
 	let scoreData = [];
-	let spaces = window.innerWidth > 600 ? 20 : 10;
+	let spaces = 20;
 
 	// Switch screens.
 	event.preventDefault();
@@ -130,6 +135,7 @@ function scores(event) {
 			score: score
 		});
 	}
+	document.querySelector("#name").value = "";
 	if (scoreData != []) {
 		scoreData.sort((a, b) => { return b.score - a.score; });
 		scoreData.splice(10);
@@ -144,6 +150,7 @@ function scores(event) {
 	}
 }
 
+// Updates elements on page with time left and current score.
 function updateScoreboard() {
 	document.querySelector("#timer").textContent = timer.toFixed(1).toString().padStart(4, "0");
 	document.querySelector("#score").textContent = score.toString().padStart(3, "0");
