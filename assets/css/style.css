@@ -15,16 +15,21 @@
 	height: 100%;
 }
 body {
+	min-width: 300px;
 	background: var(--background-secondary);
 	color: var(--main-font);
 	text-shadow: 0 0 1em var(--font-glow);
 	height: 100%;
+	font-family: VT323, monospace;
+	font-size: 1.5em;
+	letter-spacing: 2px;
 }
 main {
 	background: linear-gradient(var(--background) 85%, var(--main-font) 125%);
 	margin: 0 15%;
 	height: 100%;
 	box-shadow: 0 0 5px 5px var(--background);
+	overflow: hidden;
 }
 header {
 	margin: 0 auto;
@@ -39,24 +44,27 @@ header:after {
 	content: "";
 	margin: 0 auto;
 }
-h1 {
-	padding-top: 0.5em;
+
+/* Headers */
+h1, h2 {
 	text-align: center;
-	font-size: 3em;
+	font-family: Orbitron, serif;
 	text-shadow: 0 0 1.5em var(--font-glow);
 }
-h2 {
+h1 {
 	font-size: 3em;
-	font-family: Orbitron, serif;
-	text-shadow: 0 0 2em var(--main-font);
+	padding-top: 0.5em;
+}
+h2 {
+	margin: 0.625em 0;
+	font-size: 2em;
 	text-align: center;
 }
-p {
-	margin: 8px;
-	font-family: VT323, monospace;
-	font-size: 1.5em;
+
+/* General text. */
+p, li {
+	margin: 0.25em auto;
 	text-align: center;
-	letter-spacing: 2px;
 }
 main > div {
 	display: flex;
@@ -73,19 +81,17 @@ main > section {
 	align-items: center;
 	height: 65px;
 }
-section > div {
-	display: inherit;
-}
 section p {
 	display: inline;
 }
 .question {
 	display: none;
-	width: 70%;
+	width: 90%;
 	grid-template-columns: auto auto;
 	margin: 0 auto;
 	justify-content: space-evenly;
 	height: auto;
+	grid-gap: 5vw;
 }
 .question > h2 {
 	grid-column: 1 / 3;
@@ -96,19 +102,20 @@ button {
 	box-shadow: 0 0 4px 4px var(--main-font);
 	border: none;
 	cursor: pointer;
+	font-family: VT323, monospace;
+	font-size: 1em;
+	letter-spacing: 2px;
 }
 .question > button {
 	display: inline-block;
-	min-width: 200px;
-	min-height: 120px;
-	margin: 1.5em;
-	font-size: 2em;
-	font-family: VT323, monospace;
-	letter-spacing: 2px;
+	height: 100%;
+	min-height: 10vh;
+	min-width: 10vw;
+	font-size: 1em;
 	font-weight: 600;
 }
 #begin {
-	padding: 0 0.5em 7px 0.5em;
+	padding: 0 0.5em 6px 0.5em;
 	font-size: 3em;
 	font-family: Orbitron serif;
 	font-weight: 900;
@@ -121,12 +128,34 @@ button {
 	justify-content: space-around;
 	width: 100%;
 }
-#highscores {
-	width: 90%;
+input, input:valid, input:focus {
+	background: var(--font-secondary);
+	color: var(--background);
+	border: none;
+	width: 1.625em;
+	font-family: VT323, monospace;
+	font-size: 1em;
+	padding: 0 4px;
+	outline: none;
+}
+ul {
+	list-style: none;
 }
 
 @media all and (max-width: 1000px) {
 	main {
 		margin: 0 5%;
+	}
+}
+@media all and (max-width: 600px) {
+	h1 {
+		font-size: 2em;
+	}
+	h2 {
+		margin: 0;
+		font-size: 1.2em;
+	}
+	.question > button {
+		font-size: 0.8em;
 	}
 }
