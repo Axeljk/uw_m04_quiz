@@ -150,6 +150,14 @@ function scores(event) {
 	}
 }
 
+// Removes highscores.
+function resetScores() {
+	if (localStorage.getItem("scoreData"))
+		localStorage.removeItem("scoreData");
+	if (document.querySelector("#highscores").children.length > 0)
+		document.querySelector("#highscores").innerHTML = "";
+}
+
 // Updates elements on page with time left and current score.
 function updateScoreboard() {
 	document.querySelector("#timer").textContent = timer.toFixed(1).toString().padStart(4, "0");
