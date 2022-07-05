@@ -38,15 +38,20 @@ function answer(event) {
 	if (event.target.matches(".answer")) {
 		if (event.target.getAttribute("data-answer") === "right")
 			score++;
-		else
-			timer -= QUESTION_PENALTY;
+		else {
+			// Cheats the user out of the last .1 second but safeguards against any tomfoolery at the end causing two endGame()s getting called or timer going negative.
+			if (timer > QUESTION_PENALTY + 0.11)
+				timer -= QUESTION_PENALTY;
+			else
+				timer = 0;
+		}
 		questionSelect();
 	}
 }
 
 // Countdown function. Automatically ends the quiz if time runs out.
 function Timer() {
-	if (timer > 0)
+	if (timer > 0.01)
 		timer = (timer - 0.1);
 	else {
 		timer = 0;
